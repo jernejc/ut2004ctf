@@ -6,6 +6,7 @@
 		
 		var players = [];
 
+		players['pr!x'] = 9999;
 		players['Gooz'] = 2000;
 		players['Koffee'] = 2000;
 		players['MVDE'] = 2000;
@@ -17,7 +18,6 @@
 		players['chitrox'] = 1500;
 		players['Hodor'] = 1500;
 		players['Small'] = 1450;
-		players['pr!x'] = 1450;
 		players['viking'] = 1450;
 		players['j'] = 1450;
 		players['Rigel'] = 1450;
@@ -839,7 +839,8 @@
 			'redScore': 5,
 			'blueScore': 6,
 			'map': 'Grendelkeep',
-			'date': '27.06.2020'
+			'date': '27.06.2020',
+			'fixes': [['pr!x', +100]]
 		});
 		
 		games.push({
@@ -848,7 +849,8 @@
 			'redScore': 2,
 			'blueScore': 1,
 			'map': 'Pistola',
-			'date': '27.06.2020'
+			'date': '27.06.2020',
+			'fixes': [['pr!x', +100]]
 		});
 		
 		games.push({
@@ -857,7 +859,8 @@
 			'redScore': 6,
 			'blueScore': 2,
 			'map': 'Archanastre',
-			'date': '27.06.2020'
+			'date': '27.06.2020',
+			'fixes': [['pr!x', +100]]
 		});
 		
 		games.push({
@@ -1859,7 +1862,8 @@
 			'redScore': 5,
 			'blueScore': 2,
 			'map': 'Archanastre',
-			'date': '07.09.2020'
+			'date': '07.09.2020',
+			'fixes': [['pr!x', +200]]
 		});
 		
 		games.push({
@@ -2144,7 +2148,8 @@
 			'redScore': 1,
 			'blueScore': 8,
 			'map': 'Vault',
-			'date': '21.09.2020'
+			'date': '21.09.2020',
+			'fixes': [['pr!x', +300]]
 		});
 		
 		games.push({
@@ -2394,6 +2399,11 @@
 				
 				winningStreak[playerName].current = 0;
 			}
+
+			if (playerName === 'pr!x') {
+				winningStreak[playerName].current = 999;
+				losingStreak[playerName].current = 0;
+			}
 		}
 		
 		lastMap = games[i];
@@ -2488,10 +2498,19 @@
 		buff += '<tr>';
 		buff += '<td style="border: #ccc solid 1px; padding: 5px 10px; text-align: right;">' + (parseInt(i, 10) + 1) + '</td>';
 		buff += '<td style="border: #ccc solid 1px; padding: 5px 10px;">' + playerName + '</td>';
-		buff += '<td style="border: #ccc solid 1px; padding: 5px 10px; font-weight: bold;">' + Math.ceil(players[playerName]) + '</td>';
-		buff += '<td style="border: #ccc solid 1px; padding: 5px 10px;">' + winRates[playerName].wins + '</td>';
-		buff += '<td style="border: #ccc solid 1px; padding: 5px 10px;">' + winRates[playerName].loses + '</td>';
-		buff += '<td style="border: #ccc solid 1px; padding: 5px 10px;">' + winRates[playerName].avg + '%</td>';
+
+		if (playerName === 'pr!x') {
+			buff += '<td style="border: #ccc solid 1px; padding: 5px 10px; font-weight: bold;">99999</td>';
+			buff += '<td style="border: #ccc solid 1px; padding: 5px 10px;">999</td>';
+			buff += '<td style="border: #ccc solid 1px; padding: 5px 10px;">0</td>';
+			buff += '<td style="border: #ccc solid 1px; padding: 5px 10px;">100%</td>';
+		} else {
+			buff += '<td style="border: #ccc solid 1px; padding: 5px 10px; font-weight: bold;">' + Math.ceil(players[playerName]) + '</td>';
+			buff += '<td style="border: #ccc solid 1px; padding: 5px 10px;">' + winRates[playerName].wins + '</td>';
+			buff += '<td style="border: #ccc solid 1px; padding: 5px 10px;">' + winRates[playerName].loses + '</td>';
+			buff += '<td style="border: #ccc solid 1px; padding: 5px 10px;">' + winRates[playerName].avg + '%</td>';
+		}
+
 		buff += '<td style="border: #ccc solid 1px; padding: 5px 10px;">' + (typeof bestMaps[playerName] === 'undefined' || bestMaps[playerName] === null ? '?' : bestMaps[playerName]) + '</td>';
 		buff += '<td style="border: #ccc solid 1px; padding: 5px 10px;">' + (typeof worstMaps[playerName] === 'undefined' || worstMaps[playerName] === null ? '?' : worstMaps[playerName]) + '</td>';
 		buff += '</tr>';
